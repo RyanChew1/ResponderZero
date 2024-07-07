@@ -1,2 +1,2 @@
 # ResponderZero
-App that will allow trained first responders in the area to get to an emergency faster than first responders that are dispatched. 
+App that will allow trained first responders in the area to get to an emergency faster than first responders that are dispatched. In the case of a medical emergency, we know the faster a first responder can get there the better. However, it takes time for dispatched first responders to arrive at an emergency. This app will ping all nearby first responders near the emergency to allow for faster treatment. 
