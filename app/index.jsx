@@ -3,13 +3,17 @@ import { Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { Link, Redirect, router } from 'expo-router';
 import { SafeAreaView} from 'react-native-safe-area-context';
 import MapView, { PROVIDER_DEFAULT } from 'react-native-maps';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import GetLocation from 'react-native-get-location'
-import Marker from 'react-native-maps';
+import {Marker, Callout} from 'react-native-maps';
 import { useState } from 'react';
 
 import { images, icons } from '../constants'
 import CustomButton from '../components/CustomButton';
 import FormField from '../components/FormField';
+import { SearchBar } from '@rneui/themed';
+
+import { GOOGLE_PLACES_API_KEY } from '../lib/maps'
 
 const INITIAL_REGION = {
   latitude: 37.78825,
@@ -35,7 +39,7 @@ export default function App() {
 
             <Image
               source={icons.cancel}
-              className="w-7 h-7 mt-0 mr-4 mt-5"
+              className="w-7 h-7 mr-4 mt-5"
               resizeMode="contain"
             />
           </TouchableOpacity>
@@ -50,20 +54,37 @@ export default function App() {
           </Text>
 
           <View className="w-full min-h-[300] max-h-[350] rounded-xl mt-3">
-            <MapView 
+            <MapView
               className="w-full h-full"
-              provider = {PROVIDER_DEFAULT}
-            />
+              initialRegion={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}>
+              <Marker
+                draggable
+                coordinate={{
+                  latitude: 37.78825,
+                  longitude: -122.4324,
+                }}
+                onDragEnd={
+                  (e) => alert(JSON.stringify(e.nativeEvent.coordinate))
+                }
+                title={'Test Marker'}
+                description={'This is a description of the marker'}
+              />
+            </MapView>
           </View>
 
-          <FormField 
+          {/* <FormField 
             title="Enter Address"
             value={''}
             handleChangeText = {(e) => {
               // Implement location search to coords
             }}
             otherStyles = "mt-3"
-          />
+          /> */}
 
           <CustomButton 
             title="REPORT EMERGENCY"
