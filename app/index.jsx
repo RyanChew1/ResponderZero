@@ -6,30 +6,75 @@ import MapView, { PROVIDER_DEFAULT } from 'react-native-maps';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import GetLocation from 'react-native-get-location'
 import {Marker, Callout} from 'react-native-maps';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import * as Location from 'expo-location';
 
 import { images, icons } from '../constants'
 import CustomButton from '../components/CustomButton';
 import FormField from '../components/FormField';
 import { SearchBar } from '@rneui/themed';
 
-import { GOOGLE_PLACES_API_KEY } from '../lib/maps'
 
-const INITIAL_REGION = {
-  latitude: 37.78825,
-  longitude: 37.78825,
-}
+import { GOOGLE_PLACES_API_KEY, GOOGLE_GEOLOCATION_API_KEY, JAVASCRIPT_MAP_API_KEY } from '../lib/maps'
 
 export default function App() {
-  const [address, setAddress] = useState({
-    lat: INITIAL_REGION.latitude,
-    lon: INITIAL_REGION.longitude
-  })
 
+
+  // Get Location
+
+  const [loc, setLoc] = useState(null)
+
+  const [location, setLocation] = useState({
+    latitude: 0,
+    longitude: 0,
+  });
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let loc = await Location.getCurrentPositionAsync({});
+      setLoc(loc);
+    })();
+  }, []);
+
+  let lat = 0;
+  let long = 0;
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (loc) {
+    long = parseFloat(JSON.stringify(loc.coords.longitude))
+    lat = parseFloat(JSON.stringify(loc.coords.latitude))
+    try {
+      setMarkerPosition({
+        latitude: lat,
+        longitude: long
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // Marker
+  const [markerPosition, setMarkerPosition] = useState({
+    latitude: lat,
+    longitude: long,
+  });
+
+    const handleDragEnd = (e) => {
+      setMarkerPosition(e.nativeEvent.coordinate);
+    };
+  
   return (
     
     <SafeAreaView className="bg-primary_light_2 h-full">
-      <View className=" flex flex-row justify-evenly align-bottom mt-4">
+      <View className=" flex flex-col justify-evenly align-bottom mt-4">
           <TouchableOpacity className="flex flex-row" onPress={() => {router.push('/home')}}>  
             <Image
               source={images.logoText}
@@ -45,35 +90,53 @@ export default function App() {
           </TouchableOpacity>
       </View>
 
-      <ScrollView contentContainerStyle={{ height: '100%' }}>
+      <SafeAreaView className="px-5">
         
-        <View className="w-full items-center h-full px-4 justify-start mt-5"> 
-
-          <Text className="text-2xl font-pbold text-center text-black mt-1">
+      <Text className="text-2xl font-pbold text-center text-black bottom-3">
             Alert nearby first responders to an emergency
           </Text>
 
-          <View className="w-full min-h-[300] max-h-[350] rounded-xl mt-3">
+        <GooglePlacesAutocomplete
+              className= "justify-self-center"
+              placeholder='Search'
+              fetchDetails = { true }
+              onPress={(data, details = null) => {
+                console.log(data, details);
+              }}
+              query={{
+                key: JAVASCRIPT_MAP_API_KEY,
+                language: 'en',
+              }}
+            />
+      </SafeAreaView> 
+
+      <ScrollView contentContainerStyle={{ height: '100%' }}>
+
+        
+        
+        <View className="w-full items-center h-full px-4 justify-start mt-3"> 
+          <Text className="text-sm mt-3 font-psemibold text-secondary">
+            Drag marker to change location
+          </Text>
+
+          <View className="w-full min-h-[300] max-h-[350] rounded-xl">
             <MapView
               className="w-full h-full"
-              initialRegion={{
-                latitude: 37.78825,
-                longitude: -122.4324,
+              loadingEnabled ={true}
+              region={{
+                latitude: lat,
+                longitude: long,
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
-              }}>
+              }}
+              >
               <Marker
-                draggable
                 coordinate={{
-                  latitude: 37.78825,
-                  longitude: -122.4324,
-                }}
-                onDragEnd={
-                  (e) => alert(JSON.stringify(e.nativeEvent.coordinate))
-                }
-                title={'Test Marker'}
-                description={'This is a description of the marker'}
-              />
+                  latitude: lat, 
+                  longitude: long}}
+                draggable={true}
+                onDragEnd={handleDragEnd}
+              ></Marker>
             </MapView>
           </View>
 
@@ -85,7 +148,6 @@ export default function App() {
             }}
             otherStyles = "mt-3"
           /> */}
-
           <CustomButton 
             title="REPORT EMERGENCY"
             handlePress = {() => {
