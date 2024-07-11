@@ -46,7 +46,7 @@ const TabsLayout = () => {
             )
           }}
         />
-        {/* <Tabs.Screen 
+        <Tabs.Screen 
           name = "logs"
           options = {{
             title: 'Logs',
@@ -55,7 +55,7 @@ const TabsLayout = () => {
               <TabIcon icon={icons.menu} color={color} name="Logs" focused={focused}/>
             )
           }}
-        /> */}
+        />
         <Tabs.Screen 
           name = "profile"
           options = {{

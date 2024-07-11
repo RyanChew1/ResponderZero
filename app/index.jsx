@@ -140,14 +140,6 @@ export default function App() {
             </MapView>
           </View>
 
-          {/* <FormField 
-            title="Enter Address"
-            value={''}
-            handleChangeText = {(e) => {
-              // Implement location search to coords
-            }}
-            otherStyles = "mt-3"
-          /> */}
           <CustomButton 
             title="REPORT EMERGENCY"
             handlePress = {() => {
