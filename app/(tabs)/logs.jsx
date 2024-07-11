@@ -8,7 +8,7 @@ const logs = () => {
   return (
     <SafeAreaView className="bg-primary_light_2">
       <Text
-        className="text-3xl flex flex-row justify-start font-bold left-3">
+        className="text-3xl flex flex-row justify-start font-bold left-3 mt-2">
         Logs
       </Text>
 

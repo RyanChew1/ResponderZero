@@ -13,6 +13,8 @@ import eye from "../assets/icons/eye.png";
 import play from "../assets/icons/play.png";
 import cancel from '../assets/icons/cancel.png'
 import open from '../assets/icons/open.png'
+import warning from '../assets/icons/warning.png'
+
 
 export default {
   play,
@@ -29,5 +31,6 @@ export default {
   eyeHide,
   eye,
   cancel,
-  open
+  open,
+  warning
 };
