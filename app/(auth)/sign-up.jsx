@@ -7,6 +7,8 @@ import { useState } from 'react';
 import CustomButton from '../../components/CustomButton';
 import { Link } from 'expo-router';
 
+import { createUser } from '../../lib/appwrite';
+
 const SignUp = () => {
   const [form, setForm] = useState({
     username: '',
@@ -17,7 +19,7 @@ const SignUp = () => {
   const [isSubmitting, setisSubmitting] = useState(false)
 
   const submit = () => {
-
+    createUser()
   }
 
   return (
@@ -54,7 +56,7 @@ const SignUp = () => {
         />
 
         <CustomButton
-          title="Log in"
+          title="Sign Up"
           handlePress = {submit}
           containerStyles="mt-7 bg-primary rounded-2xl"
           isLoading={isSubmitting}
