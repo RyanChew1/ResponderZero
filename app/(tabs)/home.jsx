@@ -26,16 +26,16 @@ const Home = () => {
         <HomeButton
           styles="mt-5"
           title="Sign Up as a First Responder"
-          imageSource={icons.warning}
+          imageSource={icons.register}
           handlePress={() => {
-            router.push("/");
+            router.push("/sign-up");
           }}
         />
 
         <HomeButton
           styles="mt-5"
           title="Thank Our First Responders"
-          imageSource={icons.warning}
+          imageSource={icons.gift}
           handlePress={() => {
             router.push("/");
           }}
