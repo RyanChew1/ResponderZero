@@ -32,12 +32,12 @@ const Home = () => {
           }}
         />
 
-        <HomeButton
+<HomeButton
           styles="mt-5"
-          title="Thank Our First Responders"
-          imageSource={icons.gift}
+          title="Log In as a First Responder"
+          imageSource={icons.profile}
           handlePress={() => {
-            router.push("/");
+            router.push("/sign-in");
           }}
         />
       </View>

@@ -1,11 +1,11 @@
-import { ScrollView, Text, View, Image } from "react-native";
+import { ScrollView, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { images } from "../../constants";
+import { images, icons } from "../../constants";
 import FormField from "../../components/FormField";
 import { useState } from "react";
 import CustomButton from "../../components/CustomButton";
-import { Link } from "expo-router";
+import { Link, router, Redirect } from "expo-router";
 
 const SignIn = () => {
   const [form, setForm] = useState({
@@ -21,6 +21,18 @@ const SignIn = () => {
     <SafeAreaView className="bg-primary_light h-full">
       <ScrollView>
         <View className="w-full justify-center h-full px-4 my-2">
+        <TouchableOpacity
+            className="flex flex-row left-[80vw]"
+            onPress={() => {
+              router.push("/home");
+            }}
+          >
+            <Image
+              source={icons.cancel}
+              className="w-7 h-7 mr-4 mt-5"
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
           <Image
             source={images.logoRounded}
             resizeMode="contain"

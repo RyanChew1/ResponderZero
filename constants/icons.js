@@ -14,6 +14,11 @@ import play from "../assets/icons/play.png";
 import cancel from '../assets/icons/cancel.png'
 import open from '../assets/icons/open.png'
 import warning from '../assets/icons/warning.png'
+import gift from '../assets/icons/gift.png'
+import register from '../assets/icons/signUp.webp'
+import login from '../assets/icons/login.png'
+import warning_bw from '../assets/icons/warning_bw.png'
+import menu_lines from '../assets/icons/menu.webp'
 
 
 export default {
@@ -32,5 +37,10 @@ export default {
   eye,
   cancel,
   open,
-  warning
+  warning,
+  gift,
+  register,
+  login,
+  warning_bw,
+  menu_lines
 };

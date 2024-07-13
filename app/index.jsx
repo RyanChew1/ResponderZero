@@ -148,19 +148,6 @@ export default function App() {
         <Text className="text-2xl font-pbold text-center text-black bottom-3">
           Alert nearby first responders to an emergency
         </Text>
-
-        <GooglePlacesAutocomplete
-          className="justify-self-center"
-          placeholder="Search"
-          fetchDetails={true}
-          onPress={(data, details = null) => {
-            console.log(data, details);
-          }}
-          query={{
-            key: JAVASCRIPT_MAP_API_KEY,
-            language: "en",
-          }}
-        />
       </SafeAreaView>
 
       <ScrollView contentContainerStyle={{ height: "100%" }}>

@@ -6,7 +6,7 @@ import LogEntry from '../../components/LogEntry';
 
 const logs = () => {
   return (
-    <SafeAreaView className="bg-primary_light_2">
+    <SafeAreaView className="bg-primary_light_2 h-full">
       <Text
         className="text-3xl flex flex-row justify-start font-bold left-3 mt-2">
         Logs
