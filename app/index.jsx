@@ -19,6 +19,7 @@ import {
   GOOGLE_GEOLOCATION_API_KEY,
   JAVASCRIPT_MAP_API_KEY,
 } from "../lib/maps";
+import { reportEmergency } from "../lib/appwrite";
 
 export default function App() {
   // Get Location
@@ -99,7 +100,14 @@ export default function App() {
 
   const submit = async () => {
     setisSubmitting(true);
-    if (location.latitude == 0) {
+    if (location.latitude!=0){
+
+      await reportEmergency(location.latitude, location.longitude);
+      console.log(location.latitude);
+      console.log(location.longitude);
+      router.push("/submitted");
+    }
+    else{
       await setLocation({
         latitude: lat,
         longitude: long,
@@ -111,13 +119,10 @@ export default function App() {
         });
         console.log(lat);
         console.log(long);
+        await reportEmergency(lat, long);
         router.push("/submitted");
       }
       setisSubmitting(false);
-    } else {
-      console.log(location.latitude);
-      console.log(location.longitude);
-      router.push("/submitted");
     }
   };
 
