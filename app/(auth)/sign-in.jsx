@@ -6,6 +6,7 @@ import FormField from "../../components/FormField";
 import { useState } from "react";
 import CustomButton from "../../components/CustomButton";
 import { Link, router, Redirect } from "expo-router";
+import { signIn } from "../../lib/appwrite";
 
 const SignIn = () => {
   const [form, setForm] = useState({
@@ -15,7 +16,16 @@ const SignIn = () => {
 
   const [isSubmitting, setisSubmitting] = useState(false);
 
-  const submit = () => {};
+  const submit = () => {
+    try {
+      setisSubmitting(true)
+      signIn(form.email, form.password);
+      router.push("/home")
+    } catch (error) {
+      setisSubmitting(false)
+    }
+    
+  };
 
   return (
     <SafeAreaView className="bg-primary_light h-full">

@@ -42,7 +42,7 @@ const SignUp = () => {
         form.phone
       );
 
-      router.replace("/home");
+      router.replace("/sign-up-finish");
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
