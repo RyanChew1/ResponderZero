@@ -105,7 +105,7 @@ export default function App() {
       await reportEmergency(location.latitude, location.longitude);
       console.log(location.latitude);
       console.log(location.longitude);
-      router.push("/submitted");
+      router.push("/home");
     }
     else{
       await setLocation({
@@ -120,7 +120,7 @@ export default function App() {
         console.log(lat);
         console.log(long);
         await reportEmergency(lat, long);
-        router.push("/submitted");
+        router.push("/home");
       }
       setisSubmitting(false);
     }
