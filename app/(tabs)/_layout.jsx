@@ -46,16 +46,7 @@ const TabsLayout = () => {
             )
           }}
         />
-        <Tabs.Screen 
-          name = "logs"
-          options = {{
-            title: 'Logs',
-            headerShown: false,
-            tabBarIcon: ({color, focused}) => (
-              <TabIcon icon={icons.menu} color={color} name="Logs" focused={focused}/>
-            )
-          }}
-        />
+        
       </Tabs>
     </>
   )

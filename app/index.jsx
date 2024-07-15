@@ -14,11 +14,6 @@ import CustomButton from "../components/CustomButton";
 import FormField from "../components/FormField";
 import { SearchBar } from "@rneui/themed";
 
-import {
-  GOOGLE_PLACES_API_KEY,
-  GOOGLE_GEOLOCATION_API_KEY,
-  JAVASCRIPT_MAP_API_KEY,
-} from "../lib/maps";
 import { reportEmergency } from "../lib/appwrite";
 
 export default function App() {
